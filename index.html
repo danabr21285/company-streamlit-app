@@ -3,87 +3,225 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI-Powered Training & Onboarding Portal</title>
+  <title>Your Advantage Group Broker Portal</title>
   <style>
     :root{
-      --bg: #0b0c0f;
-      --panel: #14161b;
-      --text: #e9edf1;
-      --muted: #9aa4b2;
-      --brand: #6ee7b7;
-      --brand-2: #60a5fa;
-      --accent: #fbbf24;
+      --bg: #050608;
+      --panel: #101218;
+      --text: #f5f7fb;
+      --muted: #9aa4b8;
+      --brand: #1493ff;      /* primary YAG blue */
+      --brand-2: #00b4ff;    /* secondary YAG blue */
+      --accent: #ffffff;
       --danger: #ef4444;
       --radius: 16px;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --shadow: 0 10px 30px rgba(0,0,0,.45);
       --border: 1px solid rgba(255,255,255,.08);
     }
     [data-theme="light"]{
-      --bg:#f7fafc; --panel:#ffffff; --text:#0b0c0f; --muted:#4b5563; --border:1px solid rgba(0,0,0,.08);
+      --bg:#f7fafc;
+      --panel:#ffffff;
+      --text:#050608;
+      --muted:#4b5563;
+      --border:1px solid rgba(0,0,0,.08);
     }
     html,body{height:100%;}
-    body{margin:0;background:var(--bg);color:var(--text);font:500 16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;}
+    body{
+      margin:0;
+      background:radial-gradient(circle at top left,#111827 0,#050608 45%,#000000 100%);
+      color:var(--text);
+      font:500 16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+    }
     .container{max-width:1200px;margin:0 auto;padding:24px;}
-    header{display:flex;gap:16px;align-items:center;justify-content:space-between;margin-bottom:18px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .brand h1{font-size:20px;margin:0}
-    .tag{font-size:12px;color:var(--bg);background:linear-gradient(90deg,var(--brand),var(--brand-2));padding:6px 10px;border-radius:999px;font-weight:700}
+    header{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:24px;
+      padding:14px 18px;
+      border-radius:20px;
+      background:linear-gradient(120deg,rgba(10,16,24,.96),rgba(5,6,8,.98));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+    .brand-logo{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:6px 10px;
+      border-radius:14px;
+      background:radial-gradient(circle at 10% 0%,rgba(0,180,255,.35),transparent 60%);
+    }
+    .brand-logo img{
+      height:52px;
+      width:auto;
+      display:block;
+    }
+    .brand-text h1{
+      font-size:22px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      margin:0 0 4px;
+    }
+    .brand-text p{
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .tag{
+      font-size:11px;
+      color:#ffffff;
+      background:linear-gradient(120deg,var(--brand),var(--brand-2));
+      padding:4px 10px;
+      border-radius:999px;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      display:inline-block;
+    }
     .controls{display:flex;gap:10px;align-items:center}
     .select, .btn, .input, .textarea{
       background:var(--panel);color:var(--text);border:var(--border);border-radius:12px;padding:10px 12px;
     }
     .btn{cursor:pointer;box-shadow:var(--shadow);border:none}
-    .btn.primary{background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#081018;font-weight:800}
-    .btn.ghost{background:transparent;border:var(--border)}
+    .btn.primary{
+      background:linear-gradient(120deg,var(--brand),var(--brand-2));
+      color:#020617;
+      font-weight:800;
+    }
+    .btn.ghost{
+      background:transparent;
+      border:1px solid rgba(148,163,184,.7);
+    }
     .layout{display:grid;grid-template-columns:260px 1fr;gap:18px}
-    @media (max-width: 900px){.layout{grid-template-columns:1fr}}
+    @media (max-width: 900px){
+      .layout{grid-template-columns:1fr}
+      header{flex-direction:column;align-items:flex-start;}
+    }
     nav{
       position:sticky;top:18px;
-      background:var(--panel);border:var(--border);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)
+      background:var(--panel);
+      border:var(--border);
+      border-radius:var(--radius);
+      padding:14px;
+      box-shadow:var(--shadow)
     }
-    .nav-title{font-weight:800;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin:2px 0 12px}
+    .nav-title{
+      font-weight:800;
+      font-size:13px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      margin:2px 0 12px
+    }
     .tabs{display:grid;gap:6px}
     .tab{
       display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;cursor:pointer;
-      border:var(--border);background:transparent
+      border:var(--border);background:transparent;
+      color:var(--muted);
+      font-size:14px;
     }
-    .tab[aria-selected="true"], .tab:hover{background:rgba(255,255,255,.06)}
+    .tab[aria-selected="true"], .tab:hover{
+      background:radial-gradient(circle at 0% 0%,rgba(20,147,255,.25),rgba(15,23,42,1));
+      color:var(--text);
+      border-color:rgba(59,130,246,.85);
+    }
     .tab .dot{width:10px;height:10px;border-radius:999px;background:var(--muted)}
     .tab[data-section="dashboards"] .dot{background:var(--brand-2)}
-    .tab[data-section="training"] .dot{background:var(--accent)}
+    .tab[data-section="training"] .dot{background:#38bdf8}
     .tab[data-section="docs"] .dot{background:#a78bfa}
     .tab[data-section="assistant"] .dot{background:var(--brand)}
 
     main{min-height:60vh}
-    .panel{background:var(--panel);border:var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+    .panel{
+      background:var(--panel);
+      border:var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px
+    }
     .panel h2{margin:0 0 12px}
     .grid{display:grid;gap:16px}
     .grid.cols-2{grid-template-columns:1fr 1fr}
     @media (max-width: 900px){.grid.cols-2{grid-template-columns:1fr}}
-    .kpi{display:grid;gap:6px;background:rgba(255,255,255,.03);border-radius:12px;padding:12px;border:var(--border)}
-    .kpi .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+    .kpi{
+      display:grid;gap:6px;
+      background:rgba(15,23,42,.9);
+      border-radius:12px;
+      padding:12px;
+      border:1px solid rgba(148,163,184,.45);
+      box-shadow:0 8px 24px rgba(15,23,42,.6);
+    }
+    .kpi .label{
+      color:var(--muted);
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.16em
+    }
     .kpi .value{font:800 22px/1.2 system-ui}
 
     .iframe-wrap{position:relative;border-radius:12px;overflow:hidden;border:var(--border)}
     .iframe-wrap::after{position:absolute;inset:auto 8px 8px 8px;color:var(--muted);font-size:12px;text-align:right}
-    iframe{width:100%;height:380px;border:0;background:#0b0c0f}
+    iframe{width:100%;height:380px;border:0;background:#020617}
 
-    .video-card{display:flex;gap:12px;align-items:center;border:var(--border);border-radius:12px;padding:12px}
-    .video-thumb{width:140px;height:84px;background:rgba(255,255,255,.06);border-radius:8px;display:grid;place-items:center;color:var(--muted);font-weight:700}
+    .video-card{
+      display:flex;gap:12px;align-items:center;
+      border:var(--border);
+      border-radius:12px;
+      padding:12px;
+      background:rgba(15,23,42,.9);
+    }
+    .video-thumb{
+      width:140px;height:84px;
+      background:rgba(15,23,42,.9);
+      border-radius:8px;
+      display:grid;place-items:center;
+      color:var(--muted);font-weight:700
+    }
 
     .assistant{display:grid;gap:14px}
     .textarea{min-height:110px;resize:vertical}
-    .log{white-space:pre-wrap;background:rgba(255,255,255,.03);padding:12px;border-radius:12px;border:var(--border);max-height:220px;overflow:auto}
-    .pill{display:inline-block;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.08);font-size:12px;color:var(--muted)}
-    footer{margin:30px 0 10px;color:var(--muted);font-size:12px}
+    .log{
+      white-space:pre-wrap;
+      background:rgba(15,23,42,.9);
+      padding:12px;
+      border-radius:12px;
+      border:var(--border);
+      max-height:220px;
+      overflow:auto
+    }
+    .pill{
+      display:inline-block;
+      padding:3px 8px;
+      border-radius:999px;
+      background:rgba(20,147,255,.14);
+      font-size:12px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.16em;
+    }
+    footer{margin:30px 0 10px;color:var(--muted);font-size:12px;text-align:center}
   </style>
 </head>
 <body>
   <div class="container" id="app">
     <header>
-      <div class="brand" aria-label="Project title">
-        <span class="tag" aria-hidden="true">Distributed Teams</span>
-        <h1>AI‑Powered Training & Onboarding Portal</h1>
+      <div class="brand" aria-label="Your Advantage Group">
+        <div class="brand-logo">
+          <!-- Place YAG.png in same folder as this HTML file -->
+          <img src="YAG.png" alt="Your Advantage Group logo">
+        </div>
+        <div class="brand-text">
+          <span class="tag">Your Advantage Group</span>
+          <h1>Broker Portal</h1>
+          <p>AI-powered training & onboarding hub for Your Advantage Group partners.</p>
+        </div>
       </div>
       <div class="controls" role="group" aria-label="Global controls">
         <label class="pill" for="location">Location</label>
@@ -168,10 +306,11 @@
             </script>
           </div>
         </section>
+
         <!-- Training -->
         <section class="panel" role="tabpanel" aria-labelledby="tab-training" id="training" hidden>
           <h2>Training Hub — <span id="locLabel2">Location A</span></h2>
-          <p class="pill" style="margin:6px 0 14px">Video Trainings, Step-by-Step</p>
+          <p class="pill" style="margin:6px 0 14px">Video trainings, on demand</p>
           <!-- Video Card 1 -->
           <div class="video-card">
             <div class="video-thumb" style="padding:0;overflow:hidden;width:140px;height:84px;">
@@ -220,6 +359,7 @@
           vidDiv.querySelector('iframe').src = "https://www.youtube.com/embed/" + youtubeId + "?autoplay=1";
         }
         </script>
+
         <!-- Docs -->
         <section class="panel" role="tabpanel" aria-labelledby="tab-docs" id="docs" hidden>
           <h2>Documentation — <span id="locLabel3">Location A</span></h2>
@@ -240,7 +380,7 @@
               </ul>
             </div>
             <div>
-              <h3>How‑tos</h3>
+              <h3>How-tos</h3>
               <ul>
                 <li>
                   <a href="https://docs.google.com/document/d/1wnJDBCNRNOOF37eLl51nofBBWNmycsUrxswRANE1omg/edit?usp=sharing" target="_blank" rel="noopener">
@@ -256,6 +396,7 @@
             </div>
           </div>
         </section>
+
         <!-- Assistant -->
         <section class="panel" role="tabpanel" aria-labelledby="tab-assistant" id="assistant" hidden>
           <h2>AI Assistant — <span id="locLabel4">Location A</span></h2>
@@ -277,7 +418,7 @@
       </main>
     </div>
     <footer>
-      Built as a static demo (no backend required).
+      Your Advantage Group &middot; Internal broker portal demo (no backend required).
     </footer>
   </div>
   <script>
