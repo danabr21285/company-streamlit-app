@@ -214,17 +214,20 @@
     <header>
       <div class="brand" aria-label="Your Advantage Group">
         <div class="brand-logo">
-          <!-- Place YAG.png in same folder as this HTML file -->
-          <img src="images/YAG.png" alt="Your Advantage Group logo">
+          <!-- YAG.png is in the same folder as index.html -->
+          <img src="YAG.png" alt="Your Advantage Group logo">
         </div>
         <div class="brand-text">
           <span class="tag">Your Advantage Group</span>
           <h1>Broker Portal</h1>
           <p>AI-powered training & onboarding hub for Your Advantage Group partners.</p>
         </div>
-     <div class="controls" role="group" aria-label="Global controls">
-  <button class="btn ghost" id="themeBtn" aria-pressed="false" aria-label="Toggle theme">🌗 Theme</button>
-</div>
+      </div>
+      <div class="controls" role="group" aria-label="Global controls">
+        <button class="btn ghost" id="themeBtn" aria-pressed="false" aria-label="Toggle theme">
+          🌗 Theme
+        </button>
+      </div>
     </header>
 
     <div class="layout">
@@ -253,7 +256,7 @@
       <main>
         <!-- Dashboards -->
         <section class="panel" role="tabpanel" aria-labelledby="tab-dashboards" id="dashboards">
-          <h2>KPIs & Dashboards — <span id="locLabel">Location A</span></h2>
+          <h2>KPIs & Dashboards</h2>
           <div class="kpi-grid grid cols-2" style="margin-bottom:18px;">
             <div class="kpi">
               <span class="label">Active Users</span>
@@ -302,7 +305,7 @@
 
         <!-- Training -->
         <section class="panel" role="tabpanel" aria-labelledby="tab-training" id="training" hidden>
-          <h2>Training Hub — <span id="locLabel2">Location A</span></h2>
+          <h2>Training Hub</h2>
           <p class="pill" style="margin:6px 0 14px">Video trainings, on demand</p>
           <!-- Video Card 1 -->
           <div class="video-card">
@@ -355,7 +358,7 @@
 
         <!-- Docs -->
         <section class="panel" role="tabpanel" aria-labelledby="tab-docs" id="docs" hidden>
-          <h2>Documentation — <span id="locLabel3">Location A</span></h2>
+          <h2>Documentation</h2>
           <div class="grid">
             <div>
               <h3>Playbooks</h3>
@@ -392,7 +395,7 @@
 
         <!-- Assistant -->
         <section class="panel" role="tabpanel" aria-labelledby="tab-assistant" id="assistant" hidden>
-          <h2>AI Assistant — <span id="locLabel4">Location A</span></h2>
+          <h2>AI Assistant</h2>
           <div class="assistant">
             <label for="prompt" class="pill">Ask a question or paste a task</label>
             <textarea id="prompt" class="textarea" placeholder="e.g., Summarize top 3 risks this week and suggest actions."></textarea>
@@ -415,14 +418,8 @@
     </footer>
   </div>
   <script>
-    // --- Demo data (would normally come from a JSON file or API) ---
-    const DATA = {
-      locations: {
-        A: { label: 'Location A', users: 1280, sat: 4.6, dashboardUrl: 'https://public.tableau.com/views/CoffeeChainSalesDashboard_17563906444210/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link' },
-        B: { label: 'Location B', users: 820, sat: 4.2, dashboardUrl: 'https://public.tableau.com/views/CoffeeChainSalesDashboard_17563906444210/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link' },
-        C: { label: 'Location C', users: 1560, sat: 4.8, dashboardUrl: 'https://public.tableau.com/views/CoffeeChainSalesDashboard_17563906444210/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link' },
-      }
-    };
+    // --- KPI data (single "location") ---
+    const KPI = { users: 1280, sat: 4.6 };
 
     // --- Theme toggle with localStorage ---
     const themeBtn = document.getElementById('themeBtn');
@@ -464,38 +461,33 @@
       } else if(e.key === 'Enter' || e.key === ' '){ current.click(); }
     });
 
-    // --- Location switching ---
-    const locSelect = document.getElementById('location');
-    const labels = ['locLabel','locLabel2','locLabel3','locLabel4'];
-    locSelect.addEventListener('change', () => applyLocation(locSelect.value));
-    function applyLocation(key){
-      const loc = DATA.locations[key];
-      labels.forEach(id => document.getElementById(id).textContent = loc.label);
-      document.getElementById('kpiUsers').textContent = loc.users.toLocaleString();
-      document.getElementById('kpiSat').textContent = `${loc.sat.toFixed(1)} / 5.0`;
+    // --- Initialize KPIs ---
+    function initKpis(){
+      document.getElementById('kpiUsers').textContent = KPI.users.toLocaleString();
+      document.getElementById('kpiSat').textContent = `${KPI.sat.toFixed(1)} / 5.0`;
     }
-    // init
-    applyLocation('A');
+    initKpis();
 
     // --- Assistant (mock, no backend) ---
     const runBtn = document.getElementById('run');
     if(runBtn){
       runBtn.addEventListener('click', () => {
-        const key = locSelect.value; const loc = DATA.locations[key];
         const tone = document.getElementById('temp').value;
         const prompt = (document.getElementById('prompt').value || '').trim();
-        const base = `Summary for ${loc.label}: Active users ${loc.users}, satisfaction ${loc.sat.toFixed(1)}.\n`;
+        const base = `Summary: Active users ${KPI.users}, satisfaction ${KPI.sat.toFixed(1)}.\n`;
         const toneLine = tone === 'executive' ? 'Action: focus on high-impact items for this quarter.'
                         : tone === 'coaching' ? 'Action: small weekly improvements compounded over time will move the KPI.'
                         : 'Action: review the dashboard and align on next steps.';
         const echo = prompt ? `\nYou asked: "${prompt}"` : '';
         const recs = `\nRecommendations:\n• Prioritize top 3 blockers.\n• Capture a KPI snapshot after changes.\n• Share update in the portal.`;
-        document.getElementById('output').textContent = base + toneLine + echo + recs + "\n\n(Connect a real model by calling your API in this handler.)";
+        document.getElementById('output').textContent =
+          base + toneLine + echo + recs + "\n\n(Connect a real model by calling your API in this handler.)";
       });
     }
   </script>
 </body>
 </html>
+
 
 
 
