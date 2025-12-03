@@ -32,6 +32,9 @@
       color:var(--text);
       font:500 16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
     }
+    [data-theme="light"] body{
+      background:var(--bg);
+    }
     .container{max-width:1200px;margin:0 auto;padding:24px;}
     header{
       display:flex;
@@ -41,8 +44,8 @@
       margin-bottom:24px;
       padding:14px 18px;
       border-radius:20px;
-      background:linear-gradient(120deg,rgba(10,16,24,.96),rgba(5,6,8,.98));
-      border:1px solid rgba(255,255,255,.08);
+      background:var(--panel);
+      border:var(--border);
       box-shadow:var(--shadow);
     }
     .brand{
@@ -152,7 +155,7 @@
     @media (max-width: 900px){.grid.cols-2{grid-template-columns:1fr}}
     .kpi{
       display:grid;gap:6px;
-      background:rgba(15,23,42,.9);
+      background:var(--panel);
       border-radius:12px;
       padding:12px;
       border:1px solid rgba(148,163,184,.45);
@@ -175,11 +178,11 @@
       border:var(--border);
       border-radius:12px;
       padding:12px;
-      background:rgba(15,23,42,.9);
+      background:var(--panel);
     }
     .video-thumb{
       width:140px;height:84px;
-      background:rgba(15,23,42,.9);
+      background:var(--panel);
       border-radius:8px;
       display:grid;place-items:center;
       color:var(--muted);font-weight:700
@@ -189,7 +192,7 @@
     .textarea{min-height:110px;resize:vertical}
     .log{
       white-space:pre-wrap;
-      background:rgba(15,23,42,.9);
+      background:var(--panel);
       padding:12px;
       border-radius:12px;
       border:var(--border);
@@ -214,8 +217,9 @@
     <header>
       <div class="brand" aria-label="Your Advantage Group">
         <div class="brand-logo">
-          <!-- YAG.png is in the same folder as index.html -->
-          <img src="YAG.png" alt="Your Advantage Group logo">
+          <!-- Absolute URL so it works when embedded in Streamlit -->
+          <img src="https://raw.githubusercontent.com/danabr21285/company-streamlit-app/main/YAG.png"
+               alt="Your Advantage Group logo">
         </div>
         <div class="brand-text">
           <span class="tag">Your Advantage Group</span>
@@ -487,6 +491,7 @@
   </script>
 </body>
 </html>
+
 
 
 
